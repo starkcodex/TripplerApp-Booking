@@ -1,6 +1,8 @@
-from django.shortcuts import render, redirect
+
 from .models import Hotel
 from .forms import HotelCreateForm
+from django.shortcuts import render, redirect
+
 
 def hotelview(request):
     hotels = Hotel.objects.all()
