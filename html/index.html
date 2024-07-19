@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Trippler</title>
+    <link rel="shortcut icon" type="image/png" href="https://img.icons8.com/plasticine/64/beach-umbrella.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style type="text/tailwindcss">
+        [x-cloak] { display: none !important; } :root { --primary: rgb(235, 81, 186); --primary-hover: rgb(207, 8, 111); --font1: 'Lobster', sans-serif; } h2 { font-size: 1.5; font-weight: bold; margin-bottom: 1 rem; font-family: var(--font1);} h1 { font-size:
+        4rem; font-family: 'Lobster'; line-height: 1.2; font-weight: bold; margin-bottom: 1rem; } .button { display: inline-flex; flex-wrap: wrap; align-items: center; justify-content: center; flex-shrink: 0; text-align: center; border-radius: 0.5rem;
+        cursor: pointer; padding: 0 1rem; min-height: 3.3rem; font-weight: 600; box-shadow: 0 4px 3px rgba(0, 0, 0, 0.1); transition-property: transform; transition-duration: .2s; color: white; background-color: var(--primary); } .button:hover { background-color:
+        var(--primary-hover); } .button:active { transform: scale(0.95); }.navitems>li>a { @apply h-12 p-4 hover:bg-gray-700 rounded-lg flex items-center gap-2} .card { display: flex; flex-direction: column; overflow: hidden; position: relative; border-radius:
+        1rem; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); margin-bottom: 2rem; background-color: white; padding-bottom: 1rem; }.hoverlist>* { @apply hover:bg-gray-100 rounded-md transition duration-150; }.hoverlist>*>a { @apply flex items-center p-2
+        block; }.highlight { @apply !bg-indigo-100; } .titleBlip { animation: 1s fadeIn; } @keyframes fadeIn { 0% { opacity: 0; } 10% { opacity: 0; } 100% { opacity: 1; } }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+
+    <header x-data="{ mobilenavOpen: false}" class="md:flex items-center justify-between [&>*]:px-8 bg-pink-800 h-20 text-white sticky top-0 z-50">
+        <div class="flex items-center justify-between h-20">
+            <logo>
+                <a class="flex items-center gap-1" href="">
+                    <img class="h-15 -mt-1" src="https://img.icons8.com/plasticine/64/beach-umbrella.png" alt="beach-umbrella" />
+                    <span>Trippler</span>
+                </a>
+            </logo>
+            <mobileicon class="md:hidden">
+                <a @click="mobilenavOpen = !mobilenavOpen" class="h-12 w-12 flex items-center jusitfy-center cursor-pointer hover:bg-gray-700 rounded-lg">
+                    <img x-show="!mobilenavOpen" class="w-6 h-6 select-none" src="https://img.icons8.com/small/64/ffffff/menu.png" />
+                    <img x-show="mobilenavOpen" x-cloak class="w-6 h-6 select-none" src="https://img.icons8.com/small/64/ffffff/delete-sign.png" />
+                </a>
+            </mobileicon>
+        </div>
+
+        <nav x-show="mobilenavOpen" x-cloak class="md:!block bg-pink-800 h-screen w-screen md:h-auto md:w-auto -mt-20 md:mt-0 absolute md:relative z-[-1]" x-transition:enter="duration-300 ease-out" x-transition:enter-start="opacity-0 -translate-y-96" x-transition:enter-end="opacity-100 translate-y-0">
+            <ul class="flex items-center navitems flex-col md:flex-row gap-8 md:gap-0 justify-center h-full -translate-y-10 md:translate-y-0">
+                <li><a href="">Home</a></li>
+                <li><a href="">Bookings</a></li>
+                <li><a href="">About</a></li>
+                <li x-data="{ dropdownOpen: false }" class="relative">
+                    <a @click="dropdownOpen = !dropdownOpen" @click.away="dropdownOpen = false" class="cursor-pointer select-none">
+                        <img class="h-8 rounded-full object-cover bg-teal-200" src="https://img.icons8.com/officel/80/test-account.png" alt="test-account" />Brian
+                        <img x-bind:class="dropdownOpen ? 'rotate-180 duration-300' : '' " class="w-4" src="https://img.icons8.com/plasticine/100/expand-arrow.png" alt="expand-arrow" />
+                    </a>
+                    <div x-show="dropdownOpen" x-cloak class="absolute right-0 bg-white text-black shadow rounded-lg w-40 p-2 z-20" x-transition:enter="duration-300 ease-out" x-transition:enter-start="opacity-0 -translate-y-5 scale-90" x-transition:enter-end="opacity-100 -translate-y-0 scale-100">
+                        <ul class="hoverlist [&>li>a]:justify-end">
+                            <li><a href="">My Profile</a></li>
+                            <li><a href="">Log Out</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <hero class="grid bg-white-700 text-white text-center bg-cover z-10 relative bg-[url('https://live.staticflickr.com/65535/49909538937_3255dcf9e7_b.jpg')]">
+        <div class="col-start-1 row-start-1 bg-gray-800 bg-opacity-40 w-full h-full"></div>
+        <div class="col-start-1 row-start-1 py-24 px-10">
+            <h1 class="titleBlip">U imagine We Plan Your Trips</h1>
+            <p class="text-lg font-bold mb-10">Pick your Favoutires Destinations from Globe and make your dream comes True</p>
+            <a class="button" href="">Get Started</a>
+        </div>
+    </hero>
+
+    <content x-data="{ mobileSidebarOpen: false }" class="grid grid-cols-3 max-w-7xl mx-auto mt-6">
+        <mobileSidebarNav class="md:hidden col-span-full mx-auto mb-6 z-10 relative">
+            <a @click="mobileSidebarOpen = !mobileSidebarOpen" class="flex items-center cursor-pointer select-none font-bold hover:bg-gray-200 rounded-lg p-3">
+                <span>Categories</span>
+                <img x-bind:class="mobileSidebarOpen && 'rotate-180 duration-300'" class="w-4 ml-1.5" src="https://img.icons8.com/small/32/000000/expand-arrow.png" />
+            </a>
+        </mobileSidebarNav>
+        <main class="col-span-full md:col-span-2 mx-[5%] md:mx-[10%] order-2 md:order-1">
+            <article class="card">
+                <div class="flex items-center justify-between px-4 h-14">
+                    <h3 class="text-lg font-bold w-[50%] truncate">Madison Blue</h3>
+                    <div class="text-sm text-grey-500">flickr @ <a href="" class="hover:underline" target="">steve Jason</a></div>
+                </div>
+                <figure>
+                    <a href=""><img class="w-full" src="https://live.staticflickr.com/65535/50618365686_36f887ab88_c.jpg"></a>
+                </figure>
+                <div class="p-4 pb-2">
+                    <a class="flex items-center gap-1 mb-4" href="">
+                        <img class="w-8 h-8 rounded-full" src="https://img.icons8.com/office/62/address.png" alt="address" />
+                        <span class="font-bold hover:underline">Delhi Noida Sector-8</span>
+                    </a>
+                    <p class=""><img class="w-7 h-7 rounded-full" src="https://img.icons8.com/office/30/rupee.png" alt="rupee" /></p>3999<strong> /per night</strong>
+                    <div class="flex items-center gap-2 text-sm mb-5">
+                        <a class="bg-gray-200 rounded-full px-3 py-1 hover:bg-gray-500 hover:text-white" href="">Premuim</a>
+                        <a class="bg-gray-200 rounded-full px-3 py-1 hover:bg-gray-500 hover:text-white" href="">Luxury Stays</a>
+                    </div>
+                    <div class="flex items-center justify-between text-sm px-2">
+                        <a class="font-bold hover:underline" href="">Comments<span class="font-light text-gray-500 ml-2">3</span></a>
+                        <div class="flex items-center gap-4 [&>a:hover]:underline">
+                            <div class="flex items-center gap-1"><img class="h-10 w-10 -mt-1" src="https://img.icons8.com/isometric/50/5-star-hotel.png" alt="5-star-hotel" />1</div>
+                            <a href="">Like</a>
+                            <a href="">Save to later</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </main>
+
+        <aside x-show="mobileSidebarOpen" x-cloak class="md:!block col-span-full md:col-span-1 mx-[5%] md:mr-[20%] order-1 md:order-2" x-transition:enter="duration-300 ease-out" x-transition:enter-start="opacity-0 -mt-96" x-transition:enter-end="opacity-100 mt-0">
+            <!-- top sidebar menu -->
+            <section class="card p-4">
+                <h2>Rooms Categories</h2>
+                <ul class="hoverlist">
+                    <li class="highlight">
+                        <a href="">
+                            <img class="w-10 h-10 object-cover mr-2" src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-rooms-hotel-management-flaticons-lineal-color-flat-icons.png" alt="external-rooms-hotel-management-flaticons-lineal-color-flat-icons"
+                            />
+                            <strong>Junior Suite</strong>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <img class="w-10 h-10 object-cover mr-2" src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/62/external-rooms-casino-flaticons-lineal-color-flat-icons-3.png" alt="external-rooms-casino-flaticons-lineal-color-flat-icons-3" />
+                            <strong>Rooms with Lounge</strong></a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <img class="w-10 h-10 object-cover mr-2" src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-rooms-hospitality-services-flaticons-lineal-color-flat-icons.png" alt="external-rooms-hospitality-services-flaticons-lineal-color-flat-icons"
+                            /> <strong>The Presential Suite</strong></a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <img class="w-10 h-10 object-cover mr-2" src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-rooms-plastic-surgery-flaticons-lineal-color-flat-icons.png" alt="external-rooms-plastic-surgery-flaticons-lineal-color-flat-icons"
+                            />
+                            <strong>The Suite</strong></a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <img class="w-10 h-10 object-cover mr-2" src="https://img.icons8.com/external-flaticons-flat-flat-icons/64/external-rooms-plastic-surgery-flaticons-flat-flat-icons.png" alt="external-rooms-plastic-surgery-flaticons-flat-flat-icons" />
+                            <strong>Themed Rooms</strong></a>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- second sidebar menu -->
+            <section class="card p-4">
+                <h2 class="">Top Hotels</h2>
+                <ul class="hoverlist">
+                    <li>
+                        <a href="">
+                            <img class="w-10 h-10 rounded-lg object-cover mr-3" src="https://live.staticflickr.com/65535/50618365686_36f887ab88_c.jpg">
+                            <img class="w-8 h-8 rounded-full" src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-motel-hotel-management-flaticons-lineal-color-flat-icons.png" alt="external-motel-hotel-management-flaticons-lineal-color-flat-icons"
+                            />
+                            <span class="font-bold text-sm mr-1">Radisson Blooms</span>
+                            <span class="text-sm font-light text-grey-500">(16 Likes)</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <img class="w-10 h-10 rounded-lg object-cover mr-3" src="https://live.staticflickr.com/65535/50618365686_36f887ab88_c.jpg">
+                            <img class="w-8 h-8 rounded-full" src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-motel-hotel-management-flaticons-lineal-color-flat-icons.png" alt="external-motel-hotel-management-flaticons-lineal-color-flat-icons"
+                            />
+                            <span class="font-bold text-sm mr-1">Casino Palms</span>
+                            <span class="text-sm font-light text-grey-500">(72 Likes)</span>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- second sidebar menu -->
+            <section class="card p-4">
+                <h2 class="">Top Destinations</h2>
+                <ul class="hoverlist">
+                    <li>
+                        <a href="">
+                            <img class="w-8 h-8 rounded-full object-cover mr-1" src="https://img.icons8.com/cotton/64/location--v2.png" alt="location--v2" />
+                            <span class="font-bold text-sm mr-1">California</span>
+                            <span class="text-sm font-light text-grey-500">(151 Likes)</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <img class="w-8 h-8 rounded-full object-cover mr-1" src="https://img.icons8.com/cotton/64/location--v2.png" alt="location--v2" />
+                            <span class="font-bold text-sm mr-1">Malibu</span>
+                            <span class="text-sm font-light text-grey-500">(151 Likes)</span>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+        </aside>
+    </content>
+
+
+
+
+
+    <footer class="bg-zinc-50 text-center white:bg-pink-700 lg:text-left">
+        <div class="bg-black/5 p-4 text-center text-surface dark:text-black">
+            <strong>© 2024  :</strong>
+            <a href="https://tw-elements.com/">TW Elements</a>
+        </div>
+    </footer>
+
+
+</body>
+
+</html>

@@ -1,0 +1,21 @@
+{% extends 'layouts/b.html' %}
+
+{% block content %}
+
+<h1>Add Hotel</h1>
+<div class="card !p-14">
+    
+    {% comment %} <div class="flex items-center mb-6">
+        <img class="h-5 object-cover mr-1" src="https://img.icons8.com/small/96/333333/search--v1.png"/>
+        <a href="https://www.flickr.com/explore" target="_blank" class="hover:underline text-gray-500">Find an image on Flickr</a>
+    </div> {% endcomment %}
+
+    <form method='POST' enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded-full mt-8">Add Hotel</button>
+        <a class="bg-pink-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full ml-4" href="{{ request.META.HTTP_REFERER }}">Cancel</a>
+    </form>
+</div>
+
+{% endblock %}
