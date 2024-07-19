@@ -1,2 +1,4 @@
 .tripvenv
 tailwind
+*.pyc
+.apps\core\__pycache__
